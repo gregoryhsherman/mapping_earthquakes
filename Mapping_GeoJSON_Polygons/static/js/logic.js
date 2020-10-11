@@ -19,7 +19,7 @@ let baseMaps = {
   };
 // Create the map object with center, zoom level and default layer.
 let map = L.map('mapid', {
-    center: [43.7, -89.3],
+    center: [43.7, -79.3],
     zoom: 11,
     layers: [satelliteStreets]
 })
@@ -30,4 +30,11 @@ let map = L.map('mapid', {
 L.control.layers(baseMaps).addTo(map);
 
 // Accessing the Toronto neighborhoods GeoJSON URL.
-let torontoHoods = "https://raw.githubusercontent.com/<GitHub_name>/Mapping_Earthquakes/master/torontoNeighborhoods.json";
+let torontoHoods = "https://raw.githubusercontent.com/gregoryhsherman/mapping_earthquakes/main/torontoNeighborhoods.json";
+
+// Grabbing GeoJSON
+d3.json(torontoHoods).then(function(data) {
+    console.log(data);
+    // Creating GeoJSON Layer
+    L.geoJSON(data).addTo(map);
+});
